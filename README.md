@@ -9,6 +9,13 @@
 ## About
 Welcome to Hungry Hungry Butterfly code respository, A repository for the programmers of MiniFRC team [83] Pink Fluffy Unicorns. Code will be updated and changes will be documented in the [discussion page](https://github.com/Turtlerock0010/ADD-V/discussions/categories/changes) for changes. For team members accessing the code to push into the NoU3, please use `main.ino` as any code in the file should have the latest and most reliable code. A guide on the innerworkings of the code will be created below.
 
+### Robot Contributors
+- Owen
+- [@Turtlerock0010](https://github.com/Turtlerock0010)
+- [@Ruffle15cute](https://github.com/Ruffle15cute)
+- Oliver
+- Karan
+
 ### Layouts
 None at the moment... 👀
 > [Controller Layout Page](https://www.padcrafter.com/?templates=Hungry+Hungry+Butterfly+Controller+Layout&plat=1&leftTrigger=Outtake&rightTrigger=Intake&dpadUp=L4&dpadRight=L3&dpadLeft=L2%2FL1&dpadDown=Ground&yButton=Stow&aButton=Flip+End+Effector&leftStick=Strafe+Robot&rightStick=Rotate+Robot) if anyone is wondering where I got it from.
