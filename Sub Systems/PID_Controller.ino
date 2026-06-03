@@ -20,15 +20,19 @@ class MotorPID {
     }
 
     void updateMotor() {
+    // only activate after one PIDInterval passes
     if (millis() - lastPIDTime >= PIDInterval) {
       // Read the current angle from your encoder
       float currentAngle = myMotor.getPosition();
 
       // ** Step 1: Calculate the Error **
       float error = targetAngle - currentAngle;
+      
+      /*
       Serial.println(currentAngle);
       Serial.println(targetAngle);
-
+      */
+      
       // ** Step 2: Calculate the PID terms **
       float proportionalTerm = Kp * error;
 
