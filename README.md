@@ -13,7 +13,7 @@ Welcome to ADD VI code respository, A repository for the programmers of MiniFRC 
 > For team members accessing the code to push into the NoU3, please use go to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases) for stable code.
 
 > [!NOTE]
-> As an alternative to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases), copy and pasting is still viable! Although, I wouldn't necessarily recommend accessing the code that way due to the multi-file nature of it.
+> As an alternative to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases), copy and pasting is still viable through looking in the `src` folder! Although, I wouldn't necessarily recommend accessing the code that way due to the multi-file nature of it.
 
 
 
