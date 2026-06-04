@@ -11,8 +11,8 @@ Welcome to Hungry Hungry Butterfly code respository, A repository for the progra
 
 ### Robot Contributors
 - Owen
-- [@Turtlerock0010](https://github.com/Turtlerock0010)
-- [@Ruffle15cute](https://github.com/Ruffle15cute)
+- [@Turtlerock0010](https://github.com/Turtlerock0010) || Daniel
+- [@Ruffle15cute](https://github.com/Ruffle15cute) || Yadhu
 - Oliver
 - Karan
 
