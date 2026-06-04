@@ -1,6 +1,8 @@
 // [NOTE]
 // This code is not meant to be used on the robot.
 // Instead, this code is purely meant as reference for the actual code to be put in.
+// For fab: You must get the wires right as the module must operate within the 3.3V and 5V range. So servo pins or Qwiic port will do fine.
+// These modules cost 35$ each so be careful 😭.
 
 #include "Wire.h"
 #include "HUSKYLENS.h"
