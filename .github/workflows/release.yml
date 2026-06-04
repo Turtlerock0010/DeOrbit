@@ -1,0 +1,33 @@
+name: Deploy Arduino Release Asset
+
+on:
+  release:
+    types: [published] # Triggers automatically when you hit "Publish Release" on GitHub
+
+jobs:
+  upload-assets:
+    runs-on: ubuntu-latest
+    steps:
+    # 1. Bring your repository code into the runner
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. Reformat the folder and main.ino to match Arduino IDE standards
+    - name: Restructure and Flatten for Arduino
+      run: |
+        mkdir ADD-VI
+        cp src/main.ino ADD-VI/ADD-VI.ino
+        cp src/*.cpp ADD-VI/ 2>/dev/null || true
+        cp src/*.h ADD-VI/ 2>/dev/null || true
+
+    # 3. Zip the newly created ADD-VI folder
+    - name: Zip Release Folder
+      run: zip -r ADD-VI.zip ADD-VI
+
+    # 4. Upload the zip directly into the GitHub Release page assets
+    - name: Upload Zip to Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ADD-VI.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically provided by GitHub
