@@ -7,7 +7,15 @@
 > There is no robot yet! This page has been premade as preseason work. Stay tuned for when the MiniFRC development process begins!
 
 ## About
-Welcome to Hungry Hungry Butterfly code respository, A repository for the programmers of MiniFRC team [83] Pink Fluffy Unicorns. Code will be updated and changes will be documented in the [discussion page](https://github.com/Turtlerock0010/ADD-V/discussions/categories/changes) for changes. For team members accessing the code to push into the NoU3, please use `main.ino` as any code in the file should have the latest and most reliable code. A guide on the innerworkings of the code will be created below.
+Welcome to ADD VI code respository, A repository for the programmers of MiniFRC team [83] Pink Fluffy Unicorns! Code will be updated frequently and changes will be documented in the [discussion page](https://github.com/Turtlerock0010/ADD-VI/discussions) for changes. For spectators of the repository, please feel free to comb through the repository to see how we do things here or copy some code for use in your robot!
+
+> [!IMPORTANT]
+> For team members accessing the code to push into the NoU3, please use go to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases) for stable code.
+
+> [!NOTE]
+> As an alternative to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases), copy and pasting is still viable! Although, I wouldn't necessarily recommend accessing the code that way due to the multi-file nature of it.
+
+
 
 ### Robot Contributors
 - Owen
@@ -15,6 +23,9 @@ Welcome to Hungry Hungry Butterfly code respository, A repository for the progra
 - [@Ruffle15cute](https://github.com/Ruffle15cute) || Yadhu
 - Oliver
 - Karan
+
+
+## Extra Information
 
 ### Layouts
 None at the moment... 👀
