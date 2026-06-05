@@ -28,8 +28,9 @@ Welcome to ADD VI code respository, A repository for the programmers of MiniFRC 
 ## Extra Information
 
 ### Layouts
-None at the moment... 👀
-> [Controller Layout Page](https://www.padcrafter.com/?templates=Hungry+Hungry+Butterfly+Controller+Layout&plat=1&leftTrigger=Outtake&rightTrigger=Intake&dpadUp=L4&dpadRight=L3&dpadLeft=L2%2FL1&dpadDown=Ground&yButton=Stow&aButton=Flip+End+Effector&leftStick=Strafe+Robot&rightStick=Rotate+Robot) if anyone is wondering where I got it from.
+<img width="1335" height="650" alt="image" src="https://github.com/user-attachments/assets/b6d0803f-0be2-43a0-8093-213dfd67656f" />
+
+> [Controller Layout Page](www.padcrafter.com/) if anyone is wondering where I got it from
 
 ### PID Controller
 
