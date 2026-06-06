@@ -12,6 +12,9 @@ Welcome to ADD VI code respository, A repository for the programmers of MiniFRC 
 > [!IMPORTANT]
 > For team members accessing the code to push into the NoU3, please use go to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases) and download the first file for stable code. Also, code WILL be quick released! Large articles stay in discussions!
 
+> [!IMPORTANT]
+> To get vision working for the robot, I recommend going to [this repository](https://github.com/Turtlerock0010/MiniFRC-HuskyLens-Lib) and following the directions there to get it working!
+
 > [!NOTE]
 > As an alternative to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases), copy and pasting is still viable through looking in the `src` folder! Although, I wouldn't necessarily recommend accessing the code that way due to the multi-file nature of it.
 
