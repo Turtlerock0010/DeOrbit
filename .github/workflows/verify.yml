@@ -1,0 +1,50 @@
+name: Arduino Verification Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+
+      - name: Install ESP32 Platform Core
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+
+      - name: Install Project Dependencies
+        run: |
+          # 1. Install standard public registry libraries
+          arduino-cli lib install "Alfredo_NoU3"
+          arduino-cli lib install "PestoLink-Receive"
+          
+          # 2. Pull your custom HuskyLens fork targeting a specific stable release tag
+          # Swap out the username, repo name, and tag version (#v1.0.0) with your actual GitHub details:
+          arduino-cli lib install --git-url https://github.com/YOUR_GITHUB_USERNAME/YOUR_HUSKYLENS_FORK.git#v1.0.0
+
+      - name: Restructure and Flatten for Arduino
+        run: |
+          # 1. Create the parent folder
+          mkdir -p build_dir
+          
+          # 2. Copy and rename main.ino so it perfectly matches the folder name
+          cp src/main.ino build_dir/build_dir.ino
+          
+          # 3. Copy all your header and source files into the flat folder
+          cp src/*.cpp build_dir/ 2>/dev/null || true
+          cp src/*.h build_dir/ 2>/dev/null || true
+
+      - name: Verify and Compile Sketch
+        run: |
+          # Crucial: Ensure 'ADD-VI/' matches the exact folder name containing your main .ino file
+          arduino-cli compile --fqbn esp32:esp32:esp32s3 build_dir/
