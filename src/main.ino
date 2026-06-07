@@ -28,24 +28,9 @@ float measured_angle = 27.451;
 float angular_scale = (5.0*2.0*PI) / measured_angle;
 float movementSpeed = 1;
 
-// Vision related variables
-int* hubTag = get_TagRow(0);
-int tagID = hubTag[0];
-int tagXCenter = hubTag[1];
-int tagyCenter = hubTag[2];
-int tagPersWidth = hubTag[3]; //both of these are width and height from the perspective of the lens, not actual length
-int tagPersHeight = hubTag[4];
-const float tagWidth = 16.5; //subject to change, this is current estimation
-const float tagDist = 45.7; //baseline tag distance
-const float tagPixelWidth = 122;
-float focalConstant = tagPixelWidth*tagDist/tagWidth; //focal constant of the lens
-float currentDist;
-
 
 // Functions
-float calcDist(float fConst, float width, int pxWidth) {
-  return (focalConstant*width)/ pxWidth;
-}
+// N/A; Nothing here for now
 
 
 void setup() {
@@ -75,7 +60,6 @@ void loop() {
   if (PestoLink.isConnected()) {
     // --- Robot Functions ---
     // N/A; Nothing here for now
-    currentDist = calcDist(focalConstant, tagWidth, tagPersWidth); //calculates distance every step
 
     // Per Dependency Updates
     updateVision(); 
