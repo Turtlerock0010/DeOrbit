@@ -1,6 +1,7 @@
 // Dependencies
 #include "Wire.h"
 #include "HUSKYLENS.h"
+#include "Vision.h"
 
 HUSKYLENS huskylens;
 
@@ -12,10 +13,10 @@ int height = 0;
 bool isTagVisable = false;
 
 // Lists
-int availableTags[3][5] = { // On the format of tagID, xCenter, yCenter, width, height
-  {0, 0, 0, 0, 0}, // Hub Tag
-  {0, 0, 0, 0, 0}, // Right Trench Tag
-  {0, 0, 0, 0, 0}, // Left Trench Tag
+int availableTags[3][6] = { // On the format of tagID, xCenter, yCenter, width, height, distance
+  {0, 0, 0, 0, 0, 0}, // Hub Tag
+  {0, 0, 0, 0, 0, 0}, // Right Trench Tag
+  {0, 0, 0, 0, 0, 0}, // Left Trench Tag
 };
 
 // Return Data Functions
@@ -50,6 +51,8 @@ void updateVision() {
       availableTags[i][2] = result.yCenter;
       availableTags[i][3] = result.width;
       availableTags[i][4] = result.height;
+      availableTags[i][5] = ((FOCAL_CONSTANT * 16.5) / result.width);
+      // NOTE: the constant 16.5 is subject to change when tags are measured
     }
   } else {
     isTagVisable = false;
