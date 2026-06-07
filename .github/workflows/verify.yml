@@ -22,7 +22,17 @@ jobs:
           arduino-cli config init --overwrite
           arduino-cli config set library.enable_unsafe_install true
 
+      - name: Cache ESP32 Core and Tools
+        id: cache-esp32
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.arduino15/packages/esp32
+            ~/.arduino15/package_esp32_index.json
+          key: ${{ runner.os }}-esp32-core-v3.0.0
+
       - name: Install ESP32 Platform Core
+        if: steps.cache-esp32.outputs.cache-hit != 'true'
         run: |
           arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
           arduino-cli core install esp32:esp32 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
