@@ -24,13 +24,17 @@ jobs:
 
       - name: Install Project Dependencies
         run: |
+
+          # Force CLI to update lib list
+          arduino-cli lib update-index
+          
           # 1. Install standard public registry libraries
           arduino-cli lib install "Alfredo_NoU3"
           arduino-cli lib install "PestoLink-Receive"
           
           # 2. Pull your custom HuskyLens fork targeting a specific stable release tag
           # Swap out the username, repo name, and tag version (#v1.0.0) with your actual GitHub details:
-          arduino-cli lib install --git-url https://github.com/YOUR_GITHUB_USERNAME/YOUR_HUSKYLENS_FORK.git#v1.0.0
+          arduino-cli lib install --https://github.com/Turtlerock0010/MiniFRC-HuskyLens-Lib.git#v1.0.0
 
       - name: Restructure and Flatten for Arduino
         run: |
