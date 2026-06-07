@@ -39,7 +39,10 @@ jobs:
           
           # 2. Pull your custom HuskyLens fork targeting a specific stable release tag
           # Swap out the username, repo name, and tag version (#v1.0.0) with your actual GitHub details:
-          arduino-cli lib install --zip-path https://github.com/Turtlerock0010/MiniFRC-HuskyLens-Lib/releases/download/v1.0.0/MiniFRC-HuskyLens-Lib.zip
+          # Download the release ZIP
+          wget https://github.com/Turtlerock0010/MiniFRC-HuskyLens-Lib/releases/download/v1.0.0/MiniFRC-HuskyLens-Lib.zip
+          # Install from local ZIP file
+          arduino-cli lib install --zip-path ./MiniFRC-HuskyLens-Lib.zip
 
       - name: Restructure and Flatten for Arduino
         run: |
