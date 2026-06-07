@@ -22,25 +22,31 @@ Use: The code that goes into ADD VI
 // PID Init
 // N/A; Nothing here for now
 
-//calculate distance of given tag
-float calcDist(float fConst, float width, int pxWidth)
-{
-  return (fConst*width)/ pxWidth;
-}
 
 // --- Variables ---
 float measured_angle = 27.451;
 float angular_scale = (5.0*2.0*PI) / measured_angle;
 float movementSpeed = 1;
-int* tagID = get_TagRow(0);
-int* tagXCenter = get_TagRow(1);
-int* tagyCenter = get_TagRow(2);
-int* tagPersWidth = get_TagRow(3); //both of these are width and height from the perspective of the lens, not actual length
-int* tagPersHeight = get_TagRow(4);
+
+// Vision related variables
+int* hubTag = get_TagRow(0);
+int tagID = hubTag[0];
+int tagXCenter = hubTag[1];
+int tagyCenter = hubTag[2];
+int tagPersWidth = hubTag[3]; //both of these are width and height from the perspective of the lens, not actual length
+int tagPersHeight = hubTag[4];
 const float tagWidth = 16.5; //subject to change, this is current estimation
-const float tagDist; //baseline tag distance
-float fConst = tagPersWidth*tagDist/tagWidth; //focal constant of the lens
+const float tagDist = 45.7; //baseline tag distance
+const float tagPixelWidth = 122;
+float focalConstant = tagPixelWidth*tagDist/tagWidth; //focal constant of the lens
 float currentDist;
+
+
+// Functions
+float calcDist(float fConst, float width, int pxWidth) {
+  return (focalConstant*width)/ pxWidth;
+}
+
 
 void setup() {
   PestoLink.begin("ADD VI");
@@ -49,8 +55,8 @@ void setup() {
   NoU3.begin();
   NoU3.calibrateIMUs(); // this takes exactly one second. Do not move the robot during calibration.
 
+  // Per Dependency Starts
   beginDrivetrain(); // Starts the drivetrain
-
   beginVision(); // Starts the vision system
 }
 
@@ -69,8 +75,10 @@ void loop() {
   if (PestoLink.isConnected()) {
     // --- Robot Functions ---
     // N/A; Nothing here for now
-    currentDist = calcDist(fConst, tagWidth, tagPersWidth); //calculates distance every step
+    currentDist = calcDist(focalConstant, tagWidth, tagPersWidth); //calculates distance every step
 
+    // Per Dependency Updates
+    updateVision(); 
     updateDrivetrain(PestoLink.getAxis(0), PestoLink.getAxis(1), PestoLink.getAxis(2), movementSpeed);
     NoU3.setServiceLight(LIGHT_ENABLED);
   } else {
