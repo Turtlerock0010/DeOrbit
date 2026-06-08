@@ -13,14 +13,14 @@ int height = 0;
 bool isTagVisable = false;
 
 // Lists
-int availableTags[3][6] = { // On the format of tagID, xCenter, yCenter, width, height, distance
-  {0, 0, 0, 0, 0, 0}, // Hub Tag
-  {0, 0, 0, 0, 0, 0}, // Right Trench Tag
-  {0, 0, 0, 0, 0, 0}, // Left Trench Tag
+float availableTags[3][7] = { // On the format of tagID, xCenter, yCenter, width, height, distance, angle
+  {0, 0, 0, 0, 0, 0, 0}, // Hub Tag
+  {0, 0, 0, 0, 0, 0, 0}, // Right Trench Tag
+  {0, 0, 0, 0, 0, 0, 0}, // Left Trench Tag
 };
 
 // Return Data Functions
-int* get_TagRow(int rowIndex) { return availableTags[rowIndex];}
+float* get_TagRow(int rowIndex) { return availableTags[rowIndex];}
 bool get_isTagVisable(){ return isTagVisable;}
 
 
@@ -52,6 +52,12 @@ void updateVision() {
       availableTags[i][3] = result.width;
       availableTags[i][4] = result.height;
       availableTags[i][5] = ((FOCAL_CONSTANT * 16.5) / result.width);
+
+      // NOTE: There is an issue with yaw outputting incorrect angles.
+      //       The issue is fixable & tolerable but not solvable.
+      float ratio = (float)result.width / (float)result.height;
+      ratio = constrain(ratio, -1.0, 1.0);
+      availableTags[i][6] = acos(ratio) * (180.0 / PI);
       // NOTE: the constant 16.5 is subject to change when tags are measured
     }
   } else {
@@ -64,5 +70,7 @@ void printVision() {
   Serial.print(F(" ,xCenter= ")); Serial.print(availableTags[0][1]);
   Serial.print(F(" ,yCenter= ")); Serial.print(availableTags[0][2]);
   Serial.print(F(" ,width= "));   Serial.print(availableTags[0][3]);
-  Serial.print(F(" ,height= "));  Serial.println(availableTags[0][4]); // println here to end the line
+  Serial.print(F(" ,height= "));   Serial.print(availableTags[0][4]);
+  Serial.print(F(" ,distance= "));   Serial.print(availableTags[0][5]);
+  Serial.print(F(" ,angle= "));  Serial.println(availableTags[0][6]); // println here to end the line
 }
