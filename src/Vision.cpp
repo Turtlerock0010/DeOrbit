@@ -51,7 +51,7 @@ void updateVision() {
       availableTags[i][2] = result.yCenter;
       availableTags[i][3] = result.width;
       availableTags[i][4] = result.height;
-      availableTags[i][5] = ((FOCAL_CONSTANT * 16.5) / result.width);
+      availableTags[i][5] = ((FOCAL_CONSTANT * FIELD_APRIL_TAG_WIDTH) / result.width);
 
       // NOTE: There is an issue with yaw outputting incorrect angles.
       //       The issue is fixable & tolerable but not solvable.
