@@ -19,17 +19,17 @@ Use: The code that goes into ADD VI
 // Motor Functions Init
 // N/A; Nothing here for now
 
+// Servo Functions Init
+NoU_Servo turretServo(1);
+
 // PID Init
 // N/A; Nothing here for now
 
-
-//temporary servo test
-NoU_Servo testServo("insert port here");
-float servoAngle;
 // --- Variables ---
 float measured_angle = 27.451;
 float angular_scale = (5.0*2.0*PI) / measured_angle;
 float movementSpeed = 1;
+float turret_servo_angle = 45;
 
 
 // Functions
@@ -47,17 +47,10 @@ void setup() {
   beginDrivetrain(); // Starts the drivetrain
   beginVision(); // Starts the vision system
 
-  //temporary servo test
-  testServo.write(45);
-  servoAngle = 45;
+  turretServo.write(45);
 }
 
 void loop() {
-  //temporary servo test
-  if (PestoLink.buttonHeld("<Desired Button Here>")) {
-    servoAngle++;
-    testServo.write(servoAngle);
-  }
   // Prints robot angle to serial
   static unsigned long lastPrintTime = 0;
   if (lastPrintTime + 100 < millis()){
@@ -71,7 +64,10 @@ void loop() {
 
   if (PestoLink.isConnected()) {
     // --- Robot Functions ---
-    // N/A; Nothing here for now
+    if (PestoLink.buttonHeld(1)) {
+      turret_servo_angle += 1;
+      turretServo.write(turret_servo_angle);
+    }
 
     // Per Dependency Updates
     updateVision(); 
