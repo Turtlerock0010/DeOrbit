@@ -9,6 +9,14 @@ const int frontRightTerminal = 8;
 const int rearLeftTerminal = 4;
 const int rearRightTerminal = 5;
 
+// --- Motor Terminals ---
+const int indexerMotorTerminal = 1; // PLACEHOLDER VALUE
+const int shooterMotorTerminal = 2; // PLACEHOLDER VALUE
+const int intakeMotorTerminal = 3; // PLACEHOLDER VALUE
+
+// --- Servo Terminals ---
+const int turretServoTerminal = 1; // PLACEHOLDER VALUE
+
 // --- Motor Port Inversions ---
 const bool frontLeftInversion = true;
 const bool frontRightInversion = false;
