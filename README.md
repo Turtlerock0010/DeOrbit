@@ -3,9 +3,6 @@
 
 > No robot yet... But here is our MiniFRC 11.5 robot: Hungry Hungry Butterfly!
 
-> [!NOTE]
-> There is no robot yet! This page has been premade as preseason work. Stay tuned for when the MiniFRC development process begins!
-
 ## About
 Welcome to ADD VI code respository, A repository for the programmers of MiniFRC team [83] Pink Fluffy Unicorns! Code will be updated frequently and changes will be documented in the [discussion page](https://github.com/Turtlerock0010/ADD-VI/discussions) for changes. For spectators of the repository, please feel free to comb through the repository to see how we do things here or copy some code for use in your robot!
 
