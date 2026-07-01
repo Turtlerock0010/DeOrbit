@@ -2,6 +2,28 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+// --- Controller Button Definitions ---
+// NOTE: These are definitions for the PS5 controller
+
+// Trigger Buttons
+#define LEFT_TRIGGER_BUTTON 6
+#define RIGHT_TRIGGER_BUTTON 7
+
+// Bumper Buttons
+#define LEFT_BUMPER_BUTTON // PLACEHOLDER VALUE
+#define RIGHT_BUMPER_BUTTON // PLACEHOLDER VALUE
+
+// D-Pad Buttons
+#define UP_DPAD_BUTTON 12
+#define DOWN_DPAD_BUTTON 13
+#define LEFT_DPAD_BUTTON 14
+#define RIGHT_DPAD_BUTTON 15
+
+// Action Buttons
+#define TRIANGLE_BUTTON 3
+#define CIRCLE_BUTTON // PLACEHOLDER VALUE
+#define CROSS_BUTTON 0
+#define SQUARE_BUTTON // PLACEHOLDER VALUE
 
 // --- Drivetrain Terminals ---
 const int frontLeftTerminal = 4;
