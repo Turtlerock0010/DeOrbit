@@ -4,18 +4,19 @@
 
 
 // --- Drivetrain Terminals ---
-const int frontLeftTerminal = 1;
-const int frontRightTerminal = 8;
-const int rearLeftTerminal = 4;
+const int frontLeftTerminal = 4;
+const int frontRightTerminal = 6;
+const int rearLeftTerminal = 3;
 const int rearRightTerminal = 5;
 
-// --- Motor Terminals ---
-const int indexerMotorTerminal = 1; // PLACEHOLDER VALUE
-const int shooterMotorTerminal = 2; // PLACEHOLDER VALUE
-const int intakeMotorTerminal = 3; // PLACEHOLDER VALUE
+// --- General Motor Terminals ---
+const int intakeMotorTerminal = 8;
+const int kickerMotorTerminal = 2;
+const int shooterMotorTerminal = 7;
+const int spindexerMotorTerminal = 1;
 
-// --- Servo Terminals ---
-const int turretServoTerminal = 1; // PLACEHOLDER VALUE
+// --- General Servo Headers ---
+const int turretServoHeader = 1;
 
 // --- Motor Port Inversions ---
 const bool frontLeftInversion = true;
