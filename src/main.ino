@@ -17,10 +17,13 @@ Use: The code that goes into ADD VI
 #include "Vision.h"
 
 // Motor Functions Init
-// N/A; Nothing here for now
+NoU_Motor intakeMotor(intakeMotorTerminal);
+NoU_Motor kickerMotor(kickerMotorTerminal);
+NoU_Motor shooterMotor(shooterMotorTerminal);
+NoU_Motor spindexerMotor(spindexerMotorTerminal);
 
 // Servo Functions Init
-NoU_Servo turretServo(1);
+NoU_Servo turretServo(turretServoHeader);
 
 // PID Init
 // N/A; Nothing here for now
@@ -29,7 +32,7 @@ NoU_Servo turretServo(1);
 float measured_angle = 27.451;
 float angular_scale = (5.0*2.0*PI) / measured_angle;
 float movementSpeed = 1;
-float turret_servo_angle = 45;
+float turret_servo_angle;
 
 
 // Functions
@@ -47,7 +50,10 @@ void setup() {
   beginDrivetrain(); // Starts the drivetrain
   beginVision(); // Starts the vision system
 
-  turretServo.write(45);
+  kickerMotor.setInverted(true);
+  shooterMotor.setInverted(false);
+  intakeMotor.setInverted(false);
+  spindexerMotor.setInverted(true);
 }
 
 void loop() {
@@ -64,8 +70,44 @@ void loop() {
 
   if (PestoLink.isConnected()) {
     // --- Robot Functions ---
+
+    // Spindexer Motor Buttons
     if (PestoLink.buttonHeld(1)) {
-      turret_servo_angle += 1;
+      spindexerMotor.set(1);
+    } else {
+      spindexerMotor.set(0);
+    }
+
+    // Shooter Motor Buttons
+    if (PestoLink.buttonHeld(7)) {
+      shooterMotor.set(1);
+    } else {
+      shooterMotor.set(0);
+    }
+
+    // Intake Motor Buttons
+    if (PestoLink.buttonHeld(6)) {
+      intakeMotor.set(1);
+    } else {
+      intakeMotor.set(0);
+    }
+
+    // Kicker Motor Buttons
+    if (PestoLink.buttonHeld(3)) {
+      kickerMotor.set(1);
+    }
+    else {
+      kickerMotor.set(0);
+    }
+
+    // Turret Rotation Buttons
+    if (PestoLink.buttonHeld(4)) {
+      turret_servo_angle++;
+      turretServo.write(turret_servo_angle);
+    }
+
+    if (PestoLink.buttonHeld(5)) {
+      turret_servo_angle--;
       turretServo.write(turret_servo_angle);
     }
 
