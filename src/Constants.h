@@ -10,8 +10,8 @@
 #define RIGHT_TRIGGER_BUTTON 7
 
 // Bumper Buttons
-#define LEFT_BUMPER_BUTTON // PLACEHOLDER VALUE
-#define RIGHT_BUMPER_BUTTON // PLACEHOLDER VALUE
+#define LEFT_BUMPER_BUTTON 4
+#define RIGHT_BUMPER_BUTTON 5
 
 // D-Pad Buttons
 #define UP_DPAD_BUTTON 12
@@ -21,9 +21,9 @@
 
 // Action Buttons
 #define TRIANGLE_BUTTON 3
-#define CIRCLE_BUTTON // PLACEHOLDER VALUE
+#define CIRCLE_BUTTON 1
 #define CROSS_BUTTON 0
-#define SQUARE_BUTTON // PLACEHOLDER VALUE
+#define SQUARE_BUTTON 2
 
 // --- Drivetrain Terminals ---
 const int frontLeftTerminal = 4;
