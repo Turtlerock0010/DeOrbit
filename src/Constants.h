@@ -25,6 +25,16 @@
 #define CROSS_BUTTON 0
 #define SQUARE_BUTTON 2
 
+
+// --- State Machine Preprocessor Directives ---
+enum RobotState {
+  STANDBY,
+  SHOOT,
+  INTAKE,
+  STIR
+};
+
+
 // --- Drivetrain Terminals ---
 const int frontLeftTerminal = 4;
 const int frontRightTerminal = 6;
@@ -49,7 +59,6 @@ const bool rearRightInversion = false;
 // --- Axes Inversions ---
 const int xAxesInversion = 1;
 const int yAxesInversion = -1;
-const int rotationAxesInversion = -1;
 
 
 #endif
