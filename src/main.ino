@@ -25,6 +25,7 @@ NoU_Motor spindexerMotor(spindexerMotorTerminal);
 
 // Servo Functions Init
 NoU_Servo turretServo(turretServoHeader);
+NoU_Servo hoodServo(hoodServoHeader);
 
 // PID Init
 // N/A; Nothing here for now
@@ -35,6 +36,10 @@ float angular_scale = (5.0*2.0*PI) / measured_angle;
 float movementSpeed = 1;
 float turret_servo_angle = 0;
 float* hub_tag_data;
+unsigned long time_at_flywheel_start = 0;
+
+bool flyWheelTimeLatch = true;
+bool is_flyWheelReady = false;
 
 RobotState robot_state = STANDBY;
 
@@ -105,10 +110,26 @@ void loop() {
     // State Machine Execution Logic
     switch (robot_state) {
       case SHOOT:
-        shooterMotor.set(1);
-        spindexerMotor.set(1);
-        kickerMotor.set(1);
-        intakeMotor.set(1);
+
+        if (flyWheelTimeLatch) { // Gathers millis at first press
+          flyWheelTimeLatch = false;
+          time_at_flywheel_start = millis();
+        }
+
+        if (millis() - time_at_flywheel_start >= 1000) {
+          // When turret flywheel is at max RPM
+          shooterMotor.set(1);
+          spindexerMotor.set(1);
+          kickerMotor.set(1);
+          intakeMotor.set(1);
+        } else {
+          // When turret flywheel is warming up
+          shooterMotor.set(1);
+          spindexerMotor.set(1);
+          kickerMotor.set(0);
+          intakeMotor.set(1);
+        }
+      
         break;
 
       case INTAKE:
@@ -131,6 +152,9 @@ void loop() {
         spindexerMotor.set(0);
         kickerMotor.set(0);
         intakeMotor.set(0);
+
+        flyWheelTimeLatch = true;
+        time_at_flywheel_start = 0;
         break;
     }
     
