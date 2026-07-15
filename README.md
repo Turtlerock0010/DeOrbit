@@ -9,9 +9,6 @@ Welcome to ADD VI code respository, A repository for the programmers of MiniFRC 
 > [!IMPORTANT]
 > For team members accessing the code to push into the NoU3, please use go to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases) and download the first file for stable code. Also, code WILL be quick released! Large articles stay in discussions!
 
-> [!IMPORTANT]
-> To get vision working for the robot, I recommend going to [this repository](https://github.com/Turtlerock0010/MiniFRC-HuskyLens-Lib) and following the directions there to get it working!
-
 > [!NOTE]
 > As an alternative to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases), copy and pasting is still viable through looking in the `src` folder! Although, I wouldn't necessarily recommend accessing the code that way due to the multi-file nature of it.
 
@@ -30,47 +27,4 @@ Welcome to ADD VI code respository, A repository for the programmers of MiniFRC 
 ### Layouts
 <img width="1294" height="476" alt="ADD_VI_Controller_Scheme_ps" src="https://github.com/user-attachments/assets/7ce54d25-1a90-41e5-8e8c-447f4d5b5a0b" />
 
-
 > [Controller Layout Page](www.padcrafter.com/) if anyone is wondering where I got it from
-
-### PID Controller
-
-#### Defining A Motor
-- `MotorPID myPIDMotor(myNOUMotor);`
-- Defines a motor to the PID controller.
-- Requires a NoU motor be already defined before defining the MotorPID.
-
-#### Updating A Motor
-- `myPIDMotor.updateMotor();`
-- Updates the motor to the correct state.
-- Requires the piece of code to be within the `loop()` function of the file.
-
-#### Adjusting Kp Value
-- `myPIDMotor.Kp = 0.0;`
-- Sets the Kp value to the desired variable.
-- Requires a MotorPID to already be created.
-
-#### Adjusting Ki Value
-- `myPIDMotor.Ki = 0.0;`
-- Sets the Ki value to the desired variable.
-- Requires a MotorPID to already be created.
-
-#### Adjusting Kd Value
-- `myPIDMotor.Kd = 0.0;`
-- Sets the Kd value to the desired variable.
-- Requires a MotorPID to already be created.
-
-#### Setting the desired PID angle
-- `myPIDMotor.setAngle(90);`
-- Sets the motor to the desired angle.
-- Requires a MotorPID to already be created.
-
-### General Robot Adjustments
-
-#### Setting Drivetrain Motor Inversion
-- `frontLeftMotor.setInverted(true);`
-- `frontRightMotor.setInverted(true);`
-- `rearLeftMotor.setInverted(true);`
-- `rearRightMotor.setInverted(true);`
-- Sets inversion or no inversion for the drivetrain motors.
-- Requires drivetrain motors to already be defined.
