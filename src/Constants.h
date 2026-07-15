@@ -27,11 +27,19 @@
 
 
 // --- State Machine Preprocessor Directives ---
-enum RobotState {
+enum class RobotState {
   STANDBY,
   SHOOT,
   INTAKE,
   STIR
+};
+
+// --- Auto Aim State Machine Preprocessor Directives ---
+enum class AutoAimState {
+  STANDBY,
+  PREPARE,
+  SCAN,
+  LOCK
 };
 
 
@@ -50,10 +58,12 @@ const int spindexerMotorTerminal = 1;
 // --- General Servo Headers ---
 const int turretServoHeader = 1;
 const int hoodServoHeader = 2;
+const int leftAgitatorServoHeader = 3;
+const int rightAgitatorServoHeader = 4;
 
 // --- Motor Port Inversions ---
-const bool frontLeftInversion = true;
-const bool frontRightInversion = false;
+const bool frontLeftInversion = false;
+const bool frontRightInversion = true;
 const bool rearLeftInversion = true;
 const bool rearRightInversion = false;
 
