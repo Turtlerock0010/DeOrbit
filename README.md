@@ -1,7 +1,7 @@
 # ADD-VI
-<img width="1695" height="960" alt="image" src="https://github.com/user-attachments/assets/f84a916c-1976-49ff-936d-714fc5278448" />
+<img width="1124" height="847" alt="ADD VI" src="https://github.com/user-attachments/assets/b3420f07-6378-4564-87e6-60e5d53ab922" />
 
-> No robot yet... But here is our MiniFRC 11.5 robot: Hungry Hungry Butterfly!
+> ADD VI, our MiniFRC 12 Robot!!
 
 ## About
 Welcome to ADD VI code respository, A repository for the programmers of MiniFRC team [83] Pink Fluffy Unicorns! Code will be updated frequently and changes will be documented in the [discussion page](https://github.com/Turtlerock0010/ADD-VI/discussions) for changes. For spectators of the repository, please feel free to comb through the repository to see how we do things here or copy some code for use in your robot!
