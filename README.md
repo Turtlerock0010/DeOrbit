@@ -1,10 +1,10 @@
-# ADD-VI
+# DeOrbit
 <img width="1124" height="847" alt="ADD VI" src="https://github.com/user-attachments/assets/b3420f07-6378-4564-87e6-60e5d53ab922" />
 
-> ADD VI, our MiniFRC 12 Robot!!
+> DeOrbit, our MiniFRC 12 Robot!!
 
 ## About
-Welcome to ADD VI code respository, A repository for the programmers of MiniFRC team [83] Pink Fluffy Unicorns! Code will be updated frequently and changes will be documented in the [discussion page](https://github.com/Turtlerock0010/ADD-VI/discussions) for changes. For spectators of the repository, please feel free to comb through the repository to see how we do things here or copy some code for use in your robot!
+Welcome to DeOrbit code respository, A repository for the programmers of MiniFRC team [83] Pink Fluffy Unicorns! Code will be updated frequently and changes will be documented in the [discussion page](https://github.com/Turtlerock0010/ADD-VI/discussions) for changes. For spectators of the repository, please feel free to comb through the repository to see how we do things here or copy some code for use in your robot!
 
 > [!IMPORTANT]
 > For team members accessing the code to push into the NoU3, please use go to [the releases page](https://github.com/Turtlerock0010/ADD-VI/releases) and download the first file for stable code. Also, code WILL be quick released! Large articles stay in discussions!
