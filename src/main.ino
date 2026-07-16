@@ -1,9 +1,9 @@
 /*
-Program: ADD VI Code
+Program: DeOrbit Code
 Creation: June 1st, 2026
 Contributors: Daniel Principe, Owen King, Yadhu Barath
 Team: The Pink Fluffy Unicorns [83]
-Use: The code that goes into ADD VI
+Use: The code that goes into DeOrbit
 */
 
 // Library Dependencies
@@ -67,7 +67,7 @@ float readDistanceCm() {
 
 
 void setup() {
-  PestoLink.begin("ADD VI");
+  PestoLink.begin("DeOrbit");
   Serial.begin(115200);
 
   NoU3.begin();
