@@ -46,6 +46,9 @@ enum class AutoAimState {
 // Turret Backlash Constant
 const int turretBacklashOffset = 45;
 
+// Linear Hood Angle Multiplier
+const int linearHoodAngleMultiplier = 2;
+
 // --- Drivetrain Terminals ---
 const int frontLeftTerminal = 4;
 const int frontRightTerminal = 6;
