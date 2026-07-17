@@ -117,6 +117,8 @@ void loop() {
     //PestoLink.printfTerminal("Distance: %.3f\n", readDistanceCm());
 
 
+    // --------------- STATE MACHINES ---------------
+
     // State Machine Control Logic
     if (PestoLink.buttonHeld(RIGHT_TRIGGER_BUTTON) || PestoLink.keyHeld(Key::E)) {
       // SHOOT
@@ -124,6 +126,9 @@ void loop() {
     } else if (PestoLink.buttonHeld(LEFT_TRIGGER_BUTTON) || PestoLink.keyHeld(Key::Q)) {
       // INTAKE
       robot_state = RobotState::INTAKE;
+    } else if (PestoLink.buttonHeld(LEFT_BUMPER_BUTTON) || PestoLink.keyHeld(Key::I)) {
+      // OUTTAKE
+      robot_state = RobotState::OUTTAKE;
     } else if (PestoLink.buttonHeld(CIRCLE_BUTTON) || PestoLink.keyHeld(Key::R)) {
       // STIR
       robot_state = RobotState::STIR;
@@ -147,14 +152,15 @@ void loop() {
         if (millis() - time_at_flywheel_start >= 1000) {
           // When turret flywheel is at max RPM
           kickerMotor.set(1);
+          spindexerMotor.set(1);
         } else {
           // When turret flywheel is warming up
           kickerMotor.set(0);
+          spindexerMotor.set(0);
         }
 
         shooterMotor.set(1);
-        spindexerMotor.set(1);
-        intakeMotor.set(1);
+        intakeMotor.set(0);
 
         // Agitates the hopper
         if (oppositeAgitatorDir) {
@@ -174,6 +180,13 @@ void loop() {
         spindexerMotor.set(0);
         kickerMotor.set(0);
         intakeMotor.set(1);
+        break;
+
+      case RobotState::OUTTAKE:
+        shooterMotor.set(0);
+        spindexerMotor.set(0);
+        kickerMotor.set(0);
+        intakeMotor.set(-1);
         break;
 
       case RobotState::STIR:
@@ -255,7 +268,7 @@ void loop() {
 
       case AutoAimState::LOCK:
         // Locks on via custom servo handler and turret servo angle.
-        turret_servo_angle = shortestRecordedDistanceAngle - 45;
+        turret_servo_angle = shortestRecordedDistanceAngle - turretBacklashOffset;
         turretServoHandler(turret_servo_angle);
         auto_aim_state = AutoAimState::STANDBY;
 
@@ -273,23 +286,20 @@ void loop() {
 
     
 
-    // Turret Rotation Buttons
+    // --------------- MICELANEOUS KEYBINDS ---------------
 
+    // --- Turret Servo Adjust ---
     // Set Zero
     if (PestoLink.keyHeld(Key::T)) {
       turret_servo_angle = 0;
       turretServoHandler(turret_servo_angle);
     }
 
+    // Set to 360
     if ( PestoLink.keyHeld(Key::U)) {
       turret_servo_angle = 360;
       turretServoHandler(turret_servo_angle);
     }
-
-    //turret_servo_angle = turretReserveAngle - (boundedHeading * (180/PI) - 180) / 2) - 90
-    // turretReserveAngle - (boundedHeading * (180/PI) - 180) / 2) - 90;
-    //turretServo.write(turret_servo_angle);
-    //PestoLink.printfTerminal("Off Ang: %.3f\r\n || Res Ang: %.3f\r\n || Tur Res: %.3f\r\n", 360 - relativeAngle, turretWorldReserveAngle, turret_servo_angle);
 
     // Turn Clockwise
     if (PestoLink.buttonHeld(LEFT_DPAD_BUTTON)) {
@@ -304,8 +314,7 @@ void loop() {
       turretServoHandler(turret_servo_angle);
     }
 
-
-
+    // --- Hood Servo Adjust ---
     // Set Zero
     if (PestoLink.keyHeld(Key::F)) {
       hood_servo_angle = 0;
