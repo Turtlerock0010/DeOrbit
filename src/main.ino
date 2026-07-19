@@ -82,7 +82,7 @@ void setup() {
 
   kickerMotor.setInverted(false);
   shooterMotor.setInverted(true);
-  intakeMotor.setInverted(true);
+  intakeMotor.setInverted(false);
   spindexerMotor.setInverted(true);
 
 
@@ -109,6 +109,7 @@ void loop() {
     float heading = NoU3.roll * ANGULAR_SCALE;
 
     //PestoLink.printfTerminal("Distance: %.3f\n", readDistanceCm());
+    PestoLink.printfTerminal("Distance: %.3f\n", readDistanceCm());
 
 
     // --------------- STATE MACHINES ---------------
@@ -146,10 +147,26 @@ void loop() {
 
 
         // Times the kicker after 1 second of button held to warm up the flywheel.
-        if (millis() - time_at_flywheel_start >= 1000) {
+        if (millis() - time_at_flywheel_start >= 1500) {
           // When turret flywheel is at max RPM
           kickerMotor.set(1);
-          spindexerMotor.set(1);
+          spindexerMotor.set(.7);
+          if (millis() - time_at_flywheel_start >= 3000) {
+            // Agitates the hopper
+            static unsigned long lastAgitateTime = 0;
+            if (lastAgitateTime + 100 < millis()){
+              if (oppositeAgitatorDir) {
+                leftAgitatorServo.write(0);
+                rightAgitatorServo.write(30);
+                oppositeAgitatorDir = false;
+              } else {
+                leftAgitatorServo.write(30);
+                rightAgitatorServo.write(0);
+                oppositeAgitatorDir = true;
+              }
+              lastAgitateTime = millis();
+            }
+          }
         } else {
           // When turret flywheel is warming up
           kickerMotor.set(0);
@@ -158,17 +175,6 @@ void loop() {
 
         shooterMotor.set(1);
         intakeMotor.set(0);
-
-        // Agitates the hopper
-        if (oppositeAgitatorDir) {
-          leftAgitatorServo.write(0);
-          rightAgitatorServo.write(15);
-          oppositeAgitatorDir = false;
-        } else {
-          leftAgitatorServo.write(15);
-          rightAgitatorServo.write(0);
-          oppositeAgitatorDir = true;
-        }
       
         break;
 
@@ -202,10 +208,10 @@ void loop() {
         // Agitates the hopper
         if (oppositeAgitatorDir) {
           leftAgitatorServo.write(0);
-          rightAgitatorServo.write(15);
+          rightAgitatorServo.write(30);
           oppositeAgitatorDir = false;
         } else {
-          leftAgitatorServo.write(15);
+          leftAgitatorServo.write(30);
           rightAgitatorServo.write(0);
           oppositeAgitatorDir = true;
         }
@@ -253,7 +259,7 @@ void loop() {
           is_Scanning = true;
 
           // Incriments the angle by 4, but is adjustable.
-          turret_servo_angle += 4;
+          turret_servo_angle += 8;
           turretServoHandler(turret_servo_angle);
 
           // Checks for most shortest distance
@@ -305,18 +311,31 @@ void loop() {
       turretServoHandler(turret_servo_angle);
     }
 
+    // Set 90
+    if (PestoLink.buttonHeld(OPTION_LEFT)) {
+      turret_servo_angle = 90;
+      turretServoHandler(turret_servo_angle);
+    }
+
+    // Set to 270
+    if (PestoLink.buttonHeld(OPTION_RIGHT)) {
+      turret_servo_angle = 270;
+      turretServoHandler(turret_servo_angle);
+    }
+
     // Turn Clockwise
-    if (PestoLink.buttonHeld(LEFT_DPAD_BUTTON)) {
-      turret_servo_angle += 1;
+    if (PestoLink.buttonHeld(LEFT_DPAD_BUTTON) || PestoLink.keyHeld(Key::Digit1)) {
+      turret_servo_angle += 8;
 
       turretServoHandler(turret_servo_angle);
     }
 
     // Turn Counterclockwise
-    if (PestoLink.buttonHeld(RIGHT_DPAD_BUTTON)) {
-      turret_servo_angle -= 1;
+    if (PestoLink.buttonHeld(RIGHT_DPAD_BUTTON) || PestoLink.keyHeld(Key::Digit2)) {
+      turret_servo_angle -= 8;
       turretServoHandler(turret_servo_angle);
     }
+
 
     // --- Hood Servo Adjust ---
     // Set Zero
@@ -330,12 +349,16 @@ void loop() {
       hood_servo_angle = 85;
       hoodServo.write(hood_servo_angle);
     }
+    
+
+    // Turn Clockwise
+    if (PestoLink.keyHeld(Key::Digit1) || PestoLink.buttonHeld(SQUARE_BUTTON)) {
+      beginVision();
+      turretServoHandler(turret_servo_angle);
+    }
 
 
-
-
-
-    updateDrivetrain(PestoLink.getAxis(2), PestoLink.getAxis(1), movementSpeed);
+    updateDrivetrain(PestoLink.getAxis(1), PestoLink.getAxis(2), movementSpeed);
     NoU3.setServiceLight(LIGHT_ENABLED);
   } else {
     updateDrivetrain(0, 0, 0);
