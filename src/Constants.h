@@ -48,7 +48,7 @@ enum class AutoAimState {
 };
 
 // Turret Backlash Constant
-const int turretBacklashOffset = 45;
+const int turretBacklashOffset = 1;
 
 // Linear Hood Angle Multiplier
 const int linearHoodAngleMultiplier = 2;
@@ -73,13 +73,13 @@ const int rightAgitatorServoHeader = 4;
 
 // --- Motor Port Inversions ---
 const bool frontLeftInversion = false;
-const bool frontRightInversion = true;
-const bool rearLeftInversion = true;
+const bool frontRightInversion = false;
+const bool rearLeftInversion = false;
 const bool rearRightInversion = false;
 
 // --- Axes Inversions ---
-const int xAxesInversion = 1;
-const int yAxesInversion = -1;
+const int xAxesInversion = -1;
+const int yAxesInversion = 1;
 
 
 #endif
