@@ -84,10 +84,6 @@ void setup() {
   shooterMotor.setInverted(true);
   intakeMotor.setInverted(false);
   spindexerMotor.setInverted(true);
-
-
-  // Set Turret Motor Direction
-
 }
 
 void loop() {
@@ -107,8 +103,6 @@ void loop() {
 
     // Get robot heading (in radians) from the gyro
     float heading = NoU3.roll * ANGULAR_SCALE;
-
-    //PestoLink.printfTerminal("Distance: %.3f\n", readDistanceCm());
     PestoLink.printfTerminal("Distance: %.3f\n", readDistanceCm());
 
 
@@ -144,7 +138,6 @@ void loop() {
           flyWheelTimeLatch = false;
           time_at_flywheel_start = millis();
         }
-
 
         // Times the kicker after 1 second of button held to warm up the flywheel.
         if (millis() - time_at_flywheel_start >= 1500) {
@@ -299,18 +292,6 @@ void loop() {
     // --------------- MICELANEOUS KEYBINDS ---------------
 
     // --- Turret Servo Adjust ---
-    // Set Zero
-    if (PestoLink.keyHeld(Key::T)) {
-      turret_servo_angle = 0;
-      turretServoHandler(turret_servo_angle);
-    }
-
-    // Set to 360
-    if ( PestoLink.keyHeld(Key::U)) {
-      turret_servo_angle = 360;
-      turretServoHandler(turret_servo_angle);
-    }
-
     // Set 90
     if (PestoLink.buttonHeld(OPTION_LEFT)) {
       turret_servo_angle = 90;
@@ -336,8 +317,14 @@ void loop() {
       turretServoHandler(turret_servo_angle);
     }
 
+    // Turn Clockwise
+    if (PestoLink.keyHeld(Key::Digit1) || PestoLink.buttonHeld(SQUARE_BUTTON)) {
+      turret_servo_angle += 8;
+      turretServoHandler(turret_servo_angle);
+    }
 
-    // --- Hood Servo Adjust ---
+
+    // ----- TEST BINDS -----
     // Set Zero
     if (PestoLink.keyHeld(Key::F)) {
       hood_servo_angle = 0;
@@ -349,11 +336,16 @@ void loop() {
       hood_servo_angle = 85;
       hoodServo.write(hood_servo_angle);
     }
-    
 
-    // Turn Clockwise
-    if (PestoLink.keyHeld(Key::Digit1) || PestoLink.buttonHeld(SQUARE_BUTTON)) {
-      beginVision();
+    // Set Zero
+    if (PestoLink.keyHeld(Key::T)) {
+      turret_servo_angle = 0;
+      turretServoHandler(turret_servo_angle);
+    }
+
+    // Set to 360
+    if ( PestoLink.keyHeld(Key::U)) {
+      turret_servo_angle = 360;
       turretServoHandler(turret_servo_angle);
     }
 
