@@ -74,11 +74,7 @@ void setup() {
 
   // Per Dependency Starts
   beginDrivetrain(); // Starts the drivetrain
-
-  // Distance Sensor Initialization
-  distanceSensor.setTimeout(500);
-  distanceSensor.init();
-  distanceSensor.startContinuous();
+  beginVision();
 
   kickerMotor.setInverted(false);
   shooterMotor.setInverted(true);
@@ -323,31 +319,6 @@ void loop() {
       turretServoHandler(turret_servo_angle);
     }
 
-
-    // ----- TEST BINDS -----
-    // Set Zero
-    if (PestoLink.keyHeld(Key::F)) {
-      hood_servo_angle = 0;
-      hoodServo.write(hood_servo_angle);
-    }
-
-    // Turn Clockwise
-    if (PestoLink.keyHeld(Key::G)) {
-      hood_servo_angle = 85;
-      hoodServo.write(hood_servo_angle);
-    }
-
-    // Set Zero
-    if (PestoLink.keyHeld(Key::T)) {
-      turret_servo_angle = 0;
-      turretServoHandler(turret_servo_angle);
-    }
-
-    // Set to 360
-    if ( PestoLink.keyHeld(Key::U)) {
-      turret_servo_angle = 360;
-      turretServoHandler(turret_servo_angle);
-    }
 
 
     updateDrivetrain(PestoLink.getAxis(1), PestoLink.getAxis(2), movementSpeed);
