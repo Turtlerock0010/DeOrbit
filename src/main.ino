@@ -29,9 +29,6 @@ NoU_Servo leftAgitatorServo(leftAgitatorServoHeader);
 NoU_Servo rightAgitatorServo(rightAgitatorServoHeader);
 
 
-// PID Init
-// N/A; Nothing here for now
-
 // --- Variables ---
 float measured_angle = 27.451;
 float angular_scale = (5.0*2.0*PI) / measured_angle;
@@ -40,15 +37,16 @@ float turret_servo_angle = 0;
 float hood_servo_angle = 0;
 float shortestRecordedDistanceAngle = 0;
 float shortestRecordedDistance = 0;
+float testTurretReserveLatch = true;
 unsigned long time_at_flywheel_start = 0;
 
 bool flyWheelTimeLatch = true;
 bool is_flyWheelReady = false;
-float testTurretReserveLatch = true;
 bool respinTurret = false;
 bool freeTurret = true;
 bool oppositeAgitatorDir = false;
 bool is_Scanning = false;
+bool is_Slow = false;
 
 AutoAimState auto_aim_state = AutoAimState::STANDBY;
 RobotState robot_state = RobotState::STANDBY;
@@ -65,6 +63,7 @@ void hoodDistanceAdjustment(float recordedDistance) {
   hoodServo.write(hood_servo_angle);
 }
 
+
 void setup() {
   PestoLink.begin("DeOrbit");
   Serial.begin(115200);
@@ -76,6 +75,7 @@ void setup() {
   beginDrivetrain(); // Starts the drivetrain
   beginVision();
 
+  // Motor Flips
   kickerMotor.setInverted(false);
   shooterMotor.setInverted(true);
   intakeMotor.setInverted(false);
@@ -140,22 +140,6 @@ void loop() {
           // When turret flywheel is at max RPM
           kickerMotor.set(1);
           spindexerMotor.set(.7);
-          if (millis() - time_at_flywheel_start >= 3000) {
-            // Agitates the hopper
-            static unsigned long lastAgitateTime = 0;
-            if (lastAgitateTime + 100 < millis()){
-              if (oppositeAgitatorDir) {
-                leftAgitatorServo.write(0);
-                rightAgitatorServo.write(30);
-                oppositeAgitatorDir = false;
-              } else {
-                leftAgitatorServo.write(30);
-                rightAgitatorServo.write(0);
-                oppositeAgitatorDir = true;
-              }
-              lastAgitateTime = millis();
-            }
-          }
         } else {
           // When turret flywheel is warming up
           kickerMotor.set(0);
@@ -193,18 +177,6 @@ void loop() {
         spindexerMotor.set(-1);
         kickerMotor.set(0);
         intakeMotor.set(1);
-
-        // Agitates the hopper
-        if (oppositeAgitatorDir) {
-          leftAgitatorServo.write(0);
-          rightAgitatorServo.write(30);
-          oppositeAgitatorDir = false;
-        } else {
-          leftAgitatorServo.write(30);
-          rightAgitatorServo.write(0);
-          oppositeAgitatorDir = true;
-        }
-        
         break;
 
       case RobotState::STANDBY:
